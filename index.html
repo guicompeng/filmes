@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="src/css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-wrapper  blue darken-3">
+            <a href="#" class="brand-logo center ">Filmes</a>
+        </div>
+    </nav>
+
+    <!-- All page contents -->
+    <div class="container">
+
+        <!-- Movies list -->
+        <ul id="movie" class="collection">
+            <!-- Dinamic movies here -->
+        </ul>
+    </div>
+
+
+    <script>
+        function topMovies(json) {
+            newInput = "";
+            for (let i = 0; i < json.length; i++) {
+                newInput += '<li class="collection-item avatar">';
+                newInput += '<i class="material-icons circle red">favorite</i>';
+                newInput += '<span class="title">' + json[i].name + '</span>';
+                newInput += '<div>';
+                newInput += '<p style="display: inline;">Gênero: </p>';
+                newInput += '<p class="gender" style="display: inline;">' + json[i].gender + '</p>';
+                newInput += '</div>';
+                newInput += '<div class="inline">';
+                newInput += '<p style="display: inline;">Nota: </p>';
+                newInput += '<p class="note" style="display: inline;">' + json[i].note + '</p>';
+                newInput += '</div>';
+                newInput += '<a class="secondary-content">';
+                newInput += '<i class="material-icons">star</i>';
+                newInput += '</a>';
+                newInput += '</li>';
+            }
+            document.getElementById("movie").innerHTML = newInput;
+        }
+        fetch("https://guildeassis.github.io/json/top.json")
+            .then(response => response.json())
+            .then(json => {
+                topMovies(json);
+            });
+    </script>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="src/js/materialize.min.js"></script>
+</body>
+
+</html>
